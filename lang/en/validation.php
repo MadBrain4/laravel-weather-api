@@ -13,4 +13,8 @@
         'role_required' => 'Role is required.',
         'language_required' => 'Language is required.',
         'language_not_supported' => 'The selected language is not supported.',
+        'city_required' => 'The city field is required.',
+        'city_string' => 'The city must be a string.',
+        'city_max' => 'The city cannot exceed 100 characters.',
+        'city_invalid_format' => 'The city contains invalid characters.',
     ];

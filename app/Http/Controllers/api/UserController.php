@@ -35,12 +35,11 @@ class UserController extends Controller
      *   }
      * }
      */
-    public function updateLanguage(Request  $request)
+    public function updateLanguage(UpdateLanguageRequest  $request)
     {
         $user = $request->user();
         $user->language = $request->language;
         $user->save();
-        Log::info("aaa");
 
         app()->setLocale($user->language);
 
