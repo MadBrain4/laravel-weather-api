@@ -111,7 +111,7 @@ class UserController extends Controller
         $validRoles = config('roles.roles');
         $assignableRoles = config('roles.assignable');
 
-         $normalizedRole = strtolower($request->role);
+        $normalizedRole = strtolower($request->role);
         $user->syncRoles([$normalizedRole]);
 
         if ($user->hasRole('superadmin')) {

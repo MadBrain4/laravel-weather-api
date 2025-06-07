@@ -48,7 +48,7 @@ class RoleController extends Controller
         ]);
 
         return response()->json([
-            'message' => _('role.created_successfully'),
+            'message' => __('role.created_successfully'),
             'role' => $role,
         ], 201);
     }
