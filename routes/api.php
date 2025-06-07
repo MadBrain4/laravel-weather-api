@@ -2,8 +2,9 @@
 // routes/api.php
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserController;
-use App\Http\Controllers\Api\WeatherController;
+use App\Http\Controllers\api\WeatherController;
 use App\Http\Controllers\api\FavoriteCityController;
+use App\Http\Controllers\api\RoleController;
 use Illuminate\Support\Facades\Route;
 
 // Rutas de autenticación
@@ -17,7 +18,12 @@ Route::prefix('auth')->group(function () {
 // Rutas de idiomas
 Route::middleware('auth:sanctum')->prefix('user')->group(function () {
     // Rutas protegidas por el middleware de superadmin
-    Route::middleware(['superadmin'])->patch('/{user}/role', [UserController::class, 'changeUserRole']);
+    Route::middleware('superadmin')->group(function () {
+        Route::patch('/{user}/role', [UserController::class, 'changeUserRole']);
+        Route::post('/role', [RoleController::class, 'store']);
+        Route::put('/role/{role}', [RoleController::class, 'update']);
+    });
+    
 
     Route::patch('/language', [UserController::class, 'updateLanguage']);
     Route::get('/language', [UserController::class, 'getLanguage']);

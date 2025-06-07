@@ -5,4 +5,6 @@
         'email_unique' => 'Este correo ya está en uso.',
         'password_required' => 'La contraseña es obligatoria.',
         'password_confirmed' => 'Las contraseñas no coinciden.',
+        'role_invalid' => 'El rol seleccionado no es válido.',
+        'role_required' => 'El rol es obligatorio.',
     ];

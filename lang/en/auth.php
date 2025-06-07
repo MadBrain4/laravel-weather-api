@@ -8,4 +8,5 @@
         'language_not_supported' => 'The selected language is not supported.',
         'role_updated' => 'User role updated successfully.',
         'unauthorized' => 'You are not authorized to perform this action.',
+        'language' => 'Language',
     ];

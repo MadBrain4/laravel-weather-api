@@ -12,5 +12,5 @@
         'cannot_change_superadmin_role' => 'No se puede cambiar el rol del superadmin.',
         'role_updated' => 'Rol actualizado correctamente.',
         'unauthorized' => 'No autorizado.',
-        'language_updated' => 'Idioma actualizado correctamente.',
+        'language' => 'Idioma',
     ];

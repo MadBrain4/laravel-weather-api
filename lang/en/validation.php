@@ -9,4 +9,6 @@
         'login_success' => 'Login successful.',
         'logout_success' => 'Successfully logged out.',
         'invalid_credentials' => 'Invalid credentials.',
+        'role_invalid' => 'The selected role is invalid.',
+        'role_required' => 'Role is required.',
     ];

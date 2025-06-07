@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateLanguageRequest extends FormRequest
+class StoreRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,22 +24,27 @@ class UpdateLanguageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'language.required' => __('validation.required', ['attribute' => __('auth.language')]),
-            'language' => 'required|in:en,es',
+            'name' => 'required|string|unique:roles,name',
+            'guard_name' => 'sometimes|string|in:web,api',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'language.in' => __('validation.language_not_supported'),
+            'name.required' => 'El nombre del rol es obligatorio.',
+            'name.unique' => 'Este nombre de rol ya existe.',
+            'guard_name.in' => 'El guard_name debe ser "web" o "api".',
         ];
     }
 
-    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    protected function failedValidation(Validator $validator)
     {
-        throw new \Illuminate\Validation\ValidationException($validator, response()->json([
-            'errors' => $validator->errors(),
-        ], 422));
+        throw new HttpResponseException(
+            response()->json([
+                'message' => 'Error de validación.',
+                'errors' => $validator->errors(),
+            ], 422)
+        );
     }
 }
