@@ -1,0 +1,12 @@
+<?php
+    return [
+        'name_required' => 'Your name is required.',
+        'email_required' => 'Your email is required.',
+        'email_unique' => 'This email is already in use.',
+        'password_required' => 'Password is required.',
+        'password_confirmed' => 'Passwords do not match.',
+        'register_success' => 'User registered successfully.',
+        'login_success' => 'Login successful.',
+        'logout_success' => 'Successfully logged out.',
+        'invalid_credentials' => 'Invalid credentials.',
+    ];
