@@ -47,6 +47,9 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 # 8. Ejecuta el servidor local
 php artisan serve
 
+# 9. Entrar a la ruta http://localhost:8000/docs para revisar la documentación de los endpoints
+Ingresar http://localhost:8000/docs en el navegador
+
 ## 📘 Documentación de Endpoints
 
 ### 🔐 Autenticación
