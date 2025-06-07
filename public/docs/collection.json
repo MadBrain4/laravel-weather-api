@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "81acfdd2-71ff-4775-b6d7-2f98333b1985",
+        "_postman_id": "6af7e56c-4d40-45bc-be5e-47622b051af0",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -350,7 +350,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"language\":\"es\"}"
+                            "raw": "{\"language\":\"en\"}"
                         },
                         "description": "Este endpoint permite cambiar el idioma preferido del usuario autenticado."
                     },

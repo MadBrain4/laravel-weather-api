@@ -12,14 +12,14 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-        /**
+    /**
      * Actualizar idioma del usuario
      *
      * Este endpoint permite cambiar el idioma preferido del usuario autenticado.
      *
      * @authenticated
      *
-     * @bodyParam language string required Idioma a establecer. Debe ser uno de los valores soportados: en, es, fr, etc. Example: es
+     * @bodyParam language string El código del idioma. Example: en
      *
      * @response 200 {
      *   "message": "Idioma actualizado correctamente",
@@ -35,15 +35,12 @@ class UserController extends Controller
      *   }
      * }
      */
-    public function updateLanguage(UpdateLanguageRequest  $request)
+    public function updateLanguage(Request  $request)
     {
-        $request->validate([
-            'language' => 'required|in:' . implode(',', config('languages.supported')),
-        ]);
-
         $user = $request->user();
         $user->language = $request->language;
         $user->save();
+        Log::info("aaa");
 
         app()->setLocale($user->language);
 

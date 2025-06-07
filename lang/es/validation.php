@@ -7,4 +7,6 @@
         'password_confirmed' => 'Las contraseñas no coinciden.',
         'role_invalid' => 'El rol seleccionado no es válido.',
         'role_required' => 'El rol es obligatorio.',
+        'language_required' => 'El idioma es obligatorio.',
+        'language_not_supported' => 'El idioma seleccionado no es compatible.',
     ];

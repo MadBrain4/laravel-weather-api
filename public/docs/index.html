@@ -1402,7 +1402,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"language\": \"es\"
+    \"language\": \"en\"
 }"
 </code></pre></div>
 
@@ -1419,7 +1419,7 @@ const headers = {
 };
 
 let body = {
-    "language": "es"
+    "language": "en"
 };
 
 fetch(url, {
@@ -1538,26 +1538,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                                 <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
-        <details>
-            <summary style="padding-bottom: 10px;">
-                <b style="line-height: 2;"><code>language</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-<br>
-<p>Idioma a establecer. Debe ser uno de los valores soportados: en, es, fr, etc. Example: <code>es</code></p>
-            </summary>
-                                                <div style="margin-left: 14px; clear: unset;">
-                        <b style="line-height: 2;"><code>required</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>language</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
-                              name="language.required"                data-endpoint="PATCHapi-user-language"
-               value=""
+                              name="language"                data-endpoint="PATCHapi-user-language"
+               value="en"
                data-component="body">
     <br>
-
-                    </div>
-                                    </details>
+<p>El código del idioma. Example: <code>en</code></p>
         </div>
         </form>
 

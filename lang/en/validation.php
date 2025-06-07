@@ -11,4 +11,6 @@
         'invalid_credentials' => 'Invalid credentials.',
         'role_invalid' => 'The selected role is invalid.',
         'role_required' => 'Role is required.',
+        'language_required' => 'Language is required.',
+        'language_not_supported' => 'The selected language is not supported.',
     ];

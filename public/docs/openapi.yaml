@@ -629,7 +629,7 @@ paths:
       tags:
         - Endpoints
       requestBody:
-        required: true
+        required: false
         content:
           application/json:
             schema:
@@ -637,11 +637,9 @@ paths:
               properties:
                 language:
                   type: string
-                  description: 'Idioma a establecer. Debe ser uno de los valores soportados: en, es, fr, etc.'
-                  example: es
+                  description: 'El código del idioma.'
+                  example: en
                   nullable: false
-              required:
-                - language
     get:
       summary: 'Obtener idioma actual del usuario'
       operationId: obtenerIdiomaActualDelUsuario

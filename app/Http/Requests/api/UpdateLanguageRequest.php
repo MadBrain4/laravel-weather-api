@@ -5,6 +5,8 @@ namespace App\Http\Requests\api;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class UpdateLanguageRequest extends FormRequest
 {
@@ -23,15 +25,19 @@ class UpdateLanguageRequest extends FormRequest
      */
     public function rules(): array
     {
+        Log::info(config('languages.supported'));
         return [
-            'language.required' => __('validation.required', ['attribute' => __('auth.language')]),
-            'language' => 'required|in:en,es',
+            'language' => [
+                'required',
+                Rule::in(config('languages.supported')),
+            ],        
         ];
     }
 
     public function messages(): array
     {
         return [
+            'language.required' => __('validation.language_required'),
             'language.in' => __('validation.language_not_supported'),
         ];
     }
