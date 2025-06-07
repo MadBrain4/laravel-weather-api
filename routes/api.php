@@ -32,7 +32,7 @@ Route::middleware(['locale'])->group(function () {
 
     // Rutas de clima
     Route::middleware('auth:sanctum')->prefix('weather')->group(function () {
-        Route::get('/', [WeatherController::class, 'show']);
+        Route::post('/', [WeatherController::class, 'show']);
         Route::get('/history', [WeatherController::class, 'history']);
         Route::get('/favorite-cities', [FavoriteCityController::class, 'index']);
         Route::post('/favorite-cities', [FavoriteCityController::class, 'store']);

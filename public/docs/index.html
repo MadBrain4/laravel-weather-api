@@ -98,8 +98,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-user-language">
                                 <a href="#endpoints-GETapi-user-language">Obtener idioma actual del usuario</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-weather">
-                                <a href="#endpoints-GETapi-weather">Consultar el clima de una ciudad</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-weather">
+                                <a href="#endpoints-POSTapi-weather">Consultar el clima de una ciudad</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-weather-history">
                                 <a href="#endpoints-GETapi-weather-history">Obtener historial de consultas del clima</a>
@@ -1681,7 +1681,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-GETapi-weather">Consultar el clima de una ciudad</h2>
+                    <h2 id="endpoints-POSTapi-weather">Consultar el clima de una ciudad</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -1689,13 +1689,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <p>Este endpoint permite obtener información del clima actual de una ciudad específica. Al mismo tiempo, guarda esta consulta en el historial del usuario autenticado.</p>
 
-<span id="example-requests-GETapi-weather">
+<span id="example-requests-POSTapi-weather">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/weather" \
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/weather" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -1721,14 +1721,14 @@ let body = {
 };
 
 fetch(url, {
-    method: "GET",
+    method: "POST",
     headers,
     body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
 
-<span id="example-responses-GETapi-weather">
+<span id="example-responses-POSTapi-weather">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -1763,50 +1763,50 @@ fetch(url, {
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-weather" hidden>
+<span id="execution-results-POSTapi-weather" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-weather"></span>:
+                id="execution-response-status-POSTapi-weather"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-weather"
+    <pre class="json"><code id="execution-response-content-POSTapi-weather"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-weather" hidden>
+<span id="execution-error-POSTapi-weather" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-weather">
+    <pre><code id="execution-error-message-POSTapi-weather">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-weather" data-method="GET"
+<form id="form-POSTapi-weather" data-method="POST"
       data-path="api/weather"
       data-authed="1"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-weather', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-weather', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-weather"
-                    onclick="tryItOut('GETapi-weather');">Try it out ⚡
+                    id="btn-tryout-POSTapi-weather"
+                    onclick="tryItOut('POSTapi-weather');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-weather"
-                    onclick="cancelTryOut('GETapi-weather');" hidden>Cancel 🛑
+                    id="btn-canceltryout-POSTapi-weather"
+                    onclick="cancelTryOut('POSTapi-weather');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-weather"
+                    id="btn-executetryout-POSTapi-weather"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
             </button>
             </h3>
             <p>
-            <small class="badge badge-green">GET</small>
+            <small class="badge badge-black">POST</small>
             <b><code>api/weather</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
@@ -1815,7 +1815,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-weather"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-weather"
                value="Bearer {YOUR_AUTH_KEY}"
                data-component="header">
     <br>
@@ -1826,7 +1826,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-weather"
+                              name="Content-Type"                data-endpoint="POSTapi-weather"
                value="application/json"
                data-component="header">
     <br>
@@ -1837,7 +1837,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-weather"
+                              name="Accept"                data-endpoint="POSTapi-weather"
                value="application/json"
                data-component="header">
     <br>
@@ -1849,7 +1849,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="city"                data-endpoint="GETapi-weather"
+                              name="city"                data-endpoint="POSTapi-weather"
                value="Santiago"
                data-component="body">
     <br>

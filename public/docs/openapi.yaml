@@ -661,7 +661,7 @@ paths:
       tags:
         - Endpoints
   /api/weather:
-    get:
+    post:
       summary: 'Consultar el clima de una ciudad'
       operationId: consultarElClimaDeUnaCiudad
       description: 'Este endpoint permite obtener información del clima actual de una ciudad específica. Al mismo tiempo, guarda esta consulta en el historial del usuario autenticado.'

@@ -690,7 +690,7 @@ endpoints:
     custom: []
   -
     httpMethods:
-      - GET
+      - POST
     uri: api/weather
     metadata:
       groupName: Endpoints

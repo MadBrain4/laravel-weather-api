@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "20f3bf7b-a1fe-4d71-9f60-b465bc0a7a6f",
+        "_postman_id": "9b79229f-1a63-4dfb-9bb8-b875f406c1c7",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -410,7 +410,7 @@
                             "query": [],
                             "raw": "{{baseUrl}}\/api\/weather"
                         },
-                        "method": "GET",
+                        "method": "POST",
                         "header": [
                             {
                                 "key": "Content-Type",

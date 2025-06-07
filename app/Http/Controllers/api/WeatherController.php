@@ -6,6 +6,7 @@
     use Illuminate\Http\Request;
     use App\Http\Requests\api\WeatherRequest;
     use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
     class WeatherController extends Controller
     {
@@ -45,7 +46,8 @@
          */
         public function show(WeatherRequest $request): JsonResponse
         {
-            $city = $request->validated()['city'];
+            Log::info($request->all());
+            $city = $request->city;
             $user = $request->user();
 
             try {
