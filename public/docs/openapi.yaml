@@ -1,0 +1,934 @@
+openapi: 3.0.3
+info:
+  title: 'Laravel API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+tags:
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []
+paths:
+  /api/auth/register:
+    post:
+      summary: 'Registro de nuevo usuario'
+      operationId: registroDeNuevoUsuario
+      description: 'Este endpoint permite registrar un nuevo usuario en el sistema.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Usuario registrado correctamente'
+                  user:
+                    id: 1
+                    name: 'Juan Pérez'
+                    email: juan@example.com
+                    updated_at: '2025-06-07T12:00:00.000000Z'
+                    created_at: '2025-06-07T12:00:00.000000Z'
+                  token: 1|xXxXxXxXxXxXxXxXxXxXxXx
+                properties:
+                  message:
+                    type: string
+                    example: 'Usuario registrado correctamente'
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Juan Pérez'
+                      email:
+                        type: string
+                        example: juan@example.com
+                      updated_at:
+                        type: string
+                        example: '2025-06-07T12:00:00.000000Z'
+                      created_at:
+                        type: string
+                        example: '2025-06-07T12:00:00.000000Z'
+                  token:
+                    type: string
+                    example: 1|xXxXxXxXxXxXxXxXxXxXxXx
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    email:
+                      - 'The email has already been taken.'
+                    password:
+                      - 'The password confirmation does not match.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The email has already been taken.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password confirmation does not match.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Nombre completo del usuario.'
+                  example: 'Juan Pérez'
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Correo electrónico único.'
+                  example: juan@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'Contraseña segura. Debe coincidir con password_confirmation.'
+                  example: secret123
+                  nullable: false
+                password_confirmation:
+                  type: string
+                  description: 'Confirmación de la contraseña. Debe ser igual a password.'
+                  example: secret123
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/auth/login:
+    post:
+      summary: 'Iniciar sesión'
+      operationId: iniciarSesin
+      description: 'Este endpoint permite autenticar a un usuario existente.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Inicio de sesión exitoso'
+                  user:
+                    id: 1
+                    name: 'Juan Pérez'
+                    email: juan@example.com
+                    created_at: '2025-06-07T12:00:00.000000Z'
+                    updated_at: '2025-06-07T12:00:00.000000Z'
+                  token: 1|xXxXxXxXxXxXxXxXxXxXxXx
+                properties:
+                  message:
+                    type: string
+                    example: 'Inicio de sesión exitoso'
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Juan Pérez'
+                      email:
+                        type: string
+                        example: juan@example.com
+                      created_at:
+                        type: string
+                        example: '2025-06-07T12:00:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-06-07T12:00:00.000000Z'
+                  token:
+                    type: string
+                    example: 1|xXxXxXxXxXxXxXxXxXxXxXx
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Credenciales inválidas'
+                properties:
+                  message:
+                    type: string
+                    example: 'Credenciales inválidas'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Correo electrónico del usuario.'
+                  example: juan@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'Contraseña del usuario.'
+                  example: secret123
+                  nullable: false
+              required:
+                - email
+                - password
+      security: []
+  /api/auth/me:
+    get:
+      summary: 'Obtener usuario autenticado'
+      operationId: obtenerUsuarioAutenticado
+      description: 'Devuelve la información del usuario autenticado mediante el token.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'Juan Pérez'
+                  email: juan@example.com
+                  created_at: '2025-06-07T12:00:00.000000Z'
+                  updated_at: '2025-06-07T12:00:00.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'Juan Pérez'
+                  email:
+                    type: string
+                    example: juan@example.com
+                  created_at:
+                    type: string
+                    example: '2025-06-07T12:00:00.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2025-06-07T12:00:00.000000Z'
+      tags:
+        - Endpoints
+  /api/auth/logout:
+    post:
+      summary: 'Cerrar sesión'
+      operationId: cerrarSesin
+      description: 'Este endpoint invalida el token actual del usuario autenticado.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Sesión cerrada correctamente'
+                properties:
+                  message:
+                    type: string
+                    example: 'Sesión cerrada correctamente'
+      tags:
+        - Endpoints
+  '/api/user/{user_id}/role':
+    patch:
+      summary: 'Cambiar rol de un usuario'
+      operationId: cambiarRolDeUnUsuario
+      description: 'Este endpoint permite cambiar el rol de un usuario específico, si el usuario autenticado tiene permisos para hacerlo.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Rol actualizado correctamente'
+                  user:
+                    id: 2
+                    name: 'Pedro Sánchez'
+                    email: pedro@example.com
+                    roles:
+                      - admin
+                properties:
+                  message:
+                    type: string
+                    example: 'Rol actualizado correctamente'
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      name:
+                        type: string
+                        example: 'Pedro Sánchez'
+                      email:
+                        type: string
+                        example: pedro@example.com
+                      roles:
+                        type: array
+                        example:
+                          - admin
+                        items:
+                          type: string
+        403:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No se puede cambiar el rol del superadmin'
+                properties:
+                  message:
+                    type: string
+                    example: 'No se puede cambiar el rol del superadmin'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    role:
+                      - 'The selected role is invalid.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      role:
+                        type: array
+                        example:
+                          - 'The selected role is invalid.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  description: 'Rol a asignar. Debe ser uno de los roles asignables.'
+                  example: admin
+                  nullable: false
+              required:
+                - role
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: user
+        description: 'ID del usuario cuyo rol se desea cambiar.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /api/user/role:
+    post:
+      summary: 'Crear un nuevo rol'
+      operationId: crearUnNuevoRol
+      description: 'Este endpoint permite crear un nuevo rol en el sistema.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Rol creado exitosamente'
+                  role:
+                    id: 5
+                    name: editor
+                    guard_name: web
+                    created_at: '2025-06-07T13:00:00.000000Z'
+                    updated_at: '2025-06-07T13:00:00.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Rol creado exitosamente'
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5
+                      name:
+                        type: string
+                        example: editor
+                      guard_name:
+                        type: string
+                        example: web
+                      created_at:
+                        type: string
+                        example: '2025-06-07T13:00:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-06-07T13:00:00.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    name:
+                      - 'The name has already been taken.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name has already been taken.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Nombre del rol. Debe ser único.'
+                  example: editor
+                  nullable: false
+                guard_name:
+                  type: string
+                  description: "Nombre del guard (por defecto 'web')."
+                  example: web
+                  nullable: false
+              required:
+                - name
+  '/api/user/role/{role_id}':
+    put:
+      summary: 'Actualizar un rol existente'
+      operationId: actualizarUnRolExistente
+      description: 'Este endpoint permite modificar el nombre o guard de un rol existente.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Rol actualizado exitosamente'
+                  role:
+                    id: 5
+                    name: administrador
+                    guard_name: api
+                    created_at: '2025-06-07T13:00:00.000000Z'
+                    updated_at: '2025-06-07T13:15:00.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Rol actualizado exitosamente'
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5
+                      name:
+                        type: string
+                        example: administrador
+                      guard_name:
+                        type: string
+                        example: api
+                      created_at:
+                        type: string
+                        example: '2025-06-07T13:00:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-06-07T13:15:00.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    name:
+                      - 'The name must be at least 3 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        example:
+                          - 'The name must be at least 3 characters.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Nuevo nombre del rol.'
+                  example: administrador
+                  nullable: false
+                guard_name:
+                  type: string
+                  description: 'Nuevo guard (opcional).'
+                  example: api
+                  nullable: false
+              required:
+                - name
+    parameters:
+      -
+        in: path
+        name: role_id
+        description: 'The ID of the role.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: role
+        description: 'ID del rol a actualizar.'
+        example: 5
+        required: true
+        schema:
+          type: integer
+  /api/user/language:
+    patch:
+      summary: 'Actualizar idioma del usuario'
+      operationId: actualizarIdiomaDelUsuario
+      description: 'Este endpoint permite cambiar el idioma preferido del usuario autenticado.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Idioma actualizado correctamente'
+                  language: es
+                properties:
+                  message:
+                    type: string
+                    example: 'Idioma actualizado correctamente'
+                  language:
+                    type: string
+                    example: es
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    language:
+                      - 'The selected language is invalid.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      language:
+                        type: array
+                        example:
+                          - 'The selected language is invalid.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  type: string
+                  description: 'Idioma a establecer. Debe ser uno de los valores soportados: en, es, fr, etc.'
+                  example: es
+                  nullable: false
+              required:
+                - language
+    get:
+      summary: 'Obtener idioma actual del usuario'
+      operationId: obtenerIdiomaActualDelUsuario
+      description: 'Devuelve el idioma configurado actualmente para el usuario autenticado.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  language: es
+                properties:
+                  language:
+                    type: string
+                    example: es
+      tags:
+        - Endpoints
+  /api/weather:
+    get:
+      summary: 'Consultar el clima de una ciudad'
+      operationId: consultarElClimaDeUnaCiudad
+      description: 'Este endpoint permite obtener información del clima actual de una ciudad específica. Al mismo tiempo, guarda esta consulta en el historial del usuario autenticado.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  location:
+                    name: Santiago
+                    region: 'Region Metropolitana'
+                    country: Chile
+                    localtime: '2025-06-07 14:00'
+                  current:
+                    temp_c: 22.5
+                    condition:
+                      text: 'Partly cloudy'
+                      icon: //cdn.weatherapi.com/weather/64x64/day/116.png
+                    wind_kph: 15.2
+                    humidity: 45
+                properties:
+                  location:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: Santiago
+                      region:
+                        type: string
+                        example: 'Region Metropolitana'
+                      country:
+                        type: string
+                        example: Chile
+                      localtime:
+                        type: string
+                        example: '2025-06-07 14:00'
+                  current:
+                    type: object
+                    properties:
+                      temp_c:
+                        type: number
+                        example: 22.5
+                      condition:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                            example: 'Partly cloudy'
+                          icon:
+                            type: string
+                            example: //cdn.weatherapi.com/weather/64x64/day/116.png
+                      wind_kph:
+                        type: number
+                        example: 15.2
+                      humidity:
+                        type: integer
+                        example: 45
+        502:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No se pudo obtener la información del clima.'
+                  error: 'API key expired'
+                properties:
+                  message:
+                    type: string
+                    example: 'No se pudo obtener la información del clima.'
+                  error:
+                    type: string
+                    example: 'API key expired'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city:
+                  type: string
+                  description: 'Nombre de la ciudad a consultar.'
+                  example: Santiago
+                  nullable: false
+              required:
+                - city
+  /api/weather/history:
+    get:
+      summary: 'Obtener historial de consultas del clima'
+      operationId: obtenerHistorialDeConsultasDelClima
+      description: 'Devuelve un listado de ciudades previamente consultadas por el usuario autenticado, junto con la fecha y hora de cada consulta.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  history:
+                    -
+                      city: Santiago
+                      consulted_at: '2025-06-07 14:00:00'
+                    -
+                      city: 'Buenos Aires'
+                      consulted_at: '2025-06-06 11:45:10'
+                properties:
+                  history:
+                    type: array
+                    example:
+                      -
+                        city: Santiago
+                        consulted_at: '2025-06-07 14:00:00'
+                      -
+                        city: 'Buenos Aires'
+                        consulted_at: '2025-06-06 11:45:10'
+                    items:
+                      type: object
+                      properties:
+                        city:
+                          type: string
+                          example: Santiago
+                        consulted_at:
+                          type: string
+                          example: '2025-06-07 14:00:00'
+      tags:
+        - Endpoints
+  /api/weather/favorite-cities:
+    get:
+      summary: 'Obtener ciudades favoritas'
+      operationId: obtenerCiudadesFavoritas
+      description: 'Devuelve una lista de ciudades marcadas como favoritas por el usuario autenticado.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      user_id: 5
+                      city: Santiago
+                      created_at: '2025-06-07T14:00:00.000000Z'
+                      updated_at: '2025-06-07T14:00:00.000000Z'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        user_id: 5
+                        city: Santiago
+                        created_at: '2025-06-07T14:00:00.000000Z'
+                        updated_at: '2025-06-07T14:00:00.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        user_id:
+                          type: integer
+                          example: 5
+                        city:
+                          type: string
+                          example: Santiago
+                        created_at:
+                          type: string
+                          example: '2025-06-07T14:00:00.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2025-06-07T14:00:00.000000Z'
+      tags:
+        - Endpoints
+    post:
+      summary: 'Agregar ciudad a favoritos'
+      operationId: agregarCiudadAFavoritos
+      description: 'Permite al usuario autenticado agregar una ciudad a su lista de favoritas.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Ciudad agregada a favoritos correctamente'
+                  data:
+                    id: 2
+                    user_id: 5
+                    city: Santiago
+                    created_at: '2025-06-07T14:01:00.000000Z'
+                    updated_at: '2025-06-07T14:01:00.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Ciudad agregada a favoritos correctamente'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      user_id:
+                        type: integer
+                        example: 5
+                      city:
+                        type: string
+                        example: Santiago
+                      created_at:
+                        type: string
+                        example: '2025-06-07T14:01:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2025-06-07T14:01:00.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    city:
+                      - 'The city field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      city:
+                        type: array
+                        example:
+                          - 'The city field is required.'
+                        items:
+                          type: string
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city:
+                  type: string
+                  description: 'Nombre de la ciudad que se desea agregar.'
+                  example: Santiago
+                  nullable: false
+              required:
+                - city

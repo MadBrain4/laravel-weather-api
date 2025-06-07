@@ -15,8 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        
         $middleware->api([
-            EnsureFrontendRequestsAreStateful::class, // 👈 este es el middleware de Sanctum
+            \Illuminate\Http\Middleware\HandleCors::class, // ✅ Middleware de CORS
         ]);
 
         // Alias para middleware personalizados (antes en Kernel.php)

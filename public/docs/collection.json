@@ -1,0 +1,562 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "Laravel API Documentation",
+        "_postman_id": "81acfdd2-71ff-4775-b6d7-2f98333b1985",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "Registro de nuevo usuario",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Juan P\u00e9rez\",\"email\":\"juan@example.com\",\"password\":\"secret123\",\"password_confirmation\":\"secret123\"}"
+                        },
+                        "description": "Este endpoint permite registrar un nuevo usuario en el sistema.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"message\": \"Usuario registrado correctamente\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Juan P\u00e9rez\",\n    \"email\": \"juan@example.com\",\n    \"updated_at\": \"2025-06-07T12:00:00.000000Z\",\n    \"created_at\": \"2025-06-07T12:00:00.000000Z\"\n  },\n  \"token\": \"1|xXxXxXxXxXxXxXxXxXxXxXx\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"email\": [\n      \"The email has already been taken.\"\n    ],\n    \"password\": [\n      \"The password confirmation does not match.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Iniciar sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"juan@example.com\",\"password\":\"secret123\"}"
+                        },
+                        "description": "Este endpoint permite autenticar a un usuario existente.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Inicio de sesi\u00f3n exitoso\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Juan P\u00e9rez\",\n    \"email\": \"juan@example.com\",\n    \"created_at\": \"2025-06-07T12:00:00.000000Z\",\n    \"updated_at\": \"2025-06-07T12:00:00.000000Z\"\n  },\n  \"token\": \"1|xXxXxXxXxXxXxXxXxXxXxXx\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"message\": \"Credenciales inv\u00e1lidas\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener usuario autenticado",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/me",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/me"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve la informaci\u00f3n del usuario autenticado mediante el token."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"id\": 1,\n  \"name\": \"Juan P\u00e9rez\",\n  \"email\": \"juan@example.com\",\n  \"created_at\": \"2025-06-07T12:00:00.000000Z\",\n  \"updated_at\": \"2025-06-07T12:00:00.000000Z\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cerrar sesi\u00f3n",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Este endpoint invalida el token actual del usuario autenticado."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Sesi\u00f3n cerrada correctamente\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cambiar rol de un usuario",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user\/:user_id\/role",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user\/:user_id\/role",
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "1",
+                                    "description": "The ID of the user."
+                                },
+                                {
+                                    "id": "user",
+                                    "key": "user",
+                                    "value": "2",
+                                    "description": "ID del usuario cuyo rol se desea cambiar."
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"role\":\"admin\"}"
+                        },
+                        "description": "Este endpoint permite cambiar el rol de un usuario espec\u00edfico, si el usuario autenticado tiene permisos para hacerlo."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Rol actualizado correctamente\",\n  \"user\": {\n    \"id\": 2,\n    \"name\": \"Pedro S\u00e1nchez\",\n    \"email\": \"pedro@example.com\",\n    \"roles\": [\"admin\"]\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\n  \"message\": \"No se puede cambiar el rol del superadmin\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"role\": [\n      \"The selected role is invalid.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Crear un nuevo rol",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user\/role",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user\/role"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"editor\",\"guard_name\":\"web\"}"
+                        },
+                        "description": "Este endpoint permite crear un nuevo rol en el sistema."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"message\": \"Rol creado exitosamente\",\n  \"role\": {\n    \"id\": 5,\n    \"name\": \"editor\",\n    \"guard_name\": \"web\",\n    \"created_at\": \"2025-06-07T13:00:00.000000Z\",\n    \"updated_at\": \"2025-06-07T13:00:00.000000Z\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"name\": [\n      \"The name has already been taken.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar un rol existente",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user\/role\/:role_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user\/role\/:role_id",
+                            "variable": [
+                                {
+                                    "id": "role_id",
+                                    "key": "role_id",
+                                    "value": "1",
+                                    "description": "The ID of the role."
+                                },
+                                {
+                                    "id": "role",
+                                    "key": "role",
+                                    "value": "5",
+                                    "description": "ID del rol a actualizar."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"administrador\",\"guard_name\":\"api\"}"
+                        },
+                        "description": "Este endpoint permite modificar el nombre o guard de un rol existente."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Rol actualizado exitosamente\",\n  \"role\": {\n    \"id\": 5,\n    \"name\": \"administrador\",\n    \"guard_name\": \"api\",\n    \"created_at\": \"2025-06-07T13:00:00.000000Z\",\n    \"updated_at\": \"2025-06-07T13:15:00.000000Z\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"name\": [\n      \"The name must be at least 3 characters.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Actualizar idioma del usuario",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user\/language",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user\/language"
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"language\":\"es\"}"
+                        },
+                        "description": "Este endpoint permite cambiar el idioma preferido del usuario autenticado."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Idioma actualizado correctamente\",\n  \"language\": \"es\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"language\": [\n      \"The selected language is invalid.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener idioma actual del usuario",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user\/language",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user\/language"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve el idioma configurado actualmente para el usuario autenticado."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"language\": \"es\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Consultar el clima de una ciudad",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/weather",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/weather"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"city\":\"Santiago\"}"
+                        },
+                        "description": "Este endpoint permite obtener informaci\u00f3n del clima actual de una ciudad espec\u00edfica. Al mismo tiempo, guarda esta consulta en el historial del usuario autenticado."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"location\": {\n    \"name\": \"Santiago\",\n    \"region\": \"Region Metropolitana\",\n    \"country\": \"Chile\",\n    \"localtime\": \"2025-06-07 14:00\"\n  },\n  \"current\": {\n    \"temp_c\": 22.5,\n    \"condition\": {\n      \"text\": \"Partly cloudy\",\n      \"icon\": \"\/\/cdn.weatherapi.com\/weather\/64x64\/day\/116.png\"\n    },\n    \"wind_kph\": 15.2,\n    \"humidity\": 45\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 502,
+                            "body": "{\n  \"message\": \"No se pudo obtener la informaci\u00f3n del clima.\",\n  \"error\": \"API key expired\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener historial de consultas del clima",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/weather\/history",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/weather\/history"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve un listado de ciudades previamente consultadas por el usuario autenticado, junto con la fecha y hora de cada consulta."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"history\": [\n    {\n      \"city\": \"Santiago\",\n      \"consulted_at\": \"2025-06-07 14:00:00\"\n    },\n    {\n      \"city\": \"Buenos Aires\",\n      \"consulted_at\": \"2025-06-06 11:45:10\"\n    }\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Obtener ciudades favoritas",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/weather\/favorite-cities",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/weather\/favorite-cities"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Devuelve una lista de ciudades marcadas como favoritas por el usuario autenticado."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"user_id\": 5,\n      \"city\": \"Santiago\",\n      \"created_at\": \"2025-06-07T14:00:00.000000Z\",\n      \"updated_at\": \"2025-06-07T14:00:00.000000Z\"\n    }\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Agregar ciudad a favoritos",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/weather\/favorite-cities",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/weather\/favorite-cities"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"city\":\"Santiago\"}"
+                        },
+                        "description": "Permite al usuario autenticado agregar una ciudad a su lista de favoritas."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Ciudad agregada a favoritos correctamente\",\n  \"data\": {\n    \"id\": 2,\n    \"user_id\": 5,\n    \"city\": \"Santiago\",\n    \"created_at\": \"2025-06-07T14:01:00.000000Z\",\n    \"updated_at\": \"2025-06-07T14:01:00.000000Z\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n  \"message\": \"The given data was invalid.\",\n  \"errors\": {\n    \"city\": [\n      \"The city field is required.\"\n    ]\n  }\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "key",
+                "type": "string"
+            }
+        ]
+    }
+}
