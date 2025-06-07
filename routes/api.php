@@ -15,23 +15,26 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 });
 
-// Rutas de idiomas
-Route::middleware('auth:sanctum')->prefix('user')->group(function () {
-    // Rutas protegidas por el middleware de superadmin
-    Route::middleware('superadmin')->group(function () {
-        Route::patch('/{user}/role', [UserController::class, 'changeUserRole']);
-        Route::post('/role', [RoleController::class, 'store']);
-        Route::put('/role/{role}', [RoleController::class, 'update']);
+Route::middleware(['locale'])->group(function () {
+    // Rutas de idiomas
+    Route::middleware('auth:sanctum')->prefix('user')->group(function () {
+        // Rutas protegidas por el middleware de superadmin
+        Route::middleware('superadmin')->group(function () {
+            Route::patch('/{user}/role', [UserController::class, 'changeUserRole']);
+            Route::post('/role', [RoleController::class, 'store']);
+            Route::put('/role/{role}', [RoleController::class, 'update']);
+        });
+        
+
+        Route::patch('/language', [UserController::class, 'updateLanguage']);
+        Route::get('/language', [UserController::class, 'getLanguage']);
     });
-    
 
-    Route::patch('/language', [UserController::class, 'updateLanguage']);
-    Route::get('/language', [UserController::class, 'getLanguage']);
-});
-
-// Rutas de clima
-Route::middleware('auth:sanctum')->prefix('weather')->group(function () {
-    Route::get('/', [WeatherController::class, 'show']);
-    Route::get('/favorite-cities', [FavoriteCityController::class, 'index']);
-    Route::post('/favorite-cities', [FavoriteCityController::class, 'store']);
+    // Rutas de clima
+    Route::middleware('auth:sanctum')->prefix('weather')->group(function () {
+        Route::get('/', [WeatherController::class, 'show']);
+        Route::get('/history', [WeatherController::class, 'history']);
+        Route::get('/favorite-cities', [FavoriteCityController::class, 'index']);
+        Route::post('/favorite-cities', [FavoriteCityController::class, 'store']);
+    });
 });

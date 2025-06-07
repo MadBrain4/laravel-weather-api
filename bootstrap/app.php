@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use App\Http\Middleware\IsSuperAdmin;
+use App\Http\Middleware\SetUserLocale;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Alias para middleware personalizados (antes en Kernel.php)
         $middleware->alias([
             'superadmin' => IsSuperAdmin::class,
+            'locale' => \App\Http\Middleware\SetUserLocale::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

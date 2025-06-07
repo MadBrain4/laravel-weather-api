@@ -18,7 +18,7 @@ class TestUserSeeder extends Seeder
             ['email' => 'testuser@example.com'],
             [
                 'name' => 'Usuario de Prueba',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('password'),
                 'language' => 'es',
             ]
         );
